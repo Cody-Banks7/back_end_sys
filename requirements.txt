@@ -1,0 +1,15 @@
+bitarray==2.4.0
+click==8.0.4
+colorama==0.4.4
+Flask==2.0.3
+impyla==0.17.0
+itsdangerous==2.1.0
+Jinja2==3.0.3
+MarkupSafe==2.1.0
+ply==3.11
+pure-sasl==0.6.2
+six==1.16.0
+thrift==0.11.0
+thrift-sasl==0.4.3
+thriftpy==0.3.9
+Werkzeug==2.0.3
