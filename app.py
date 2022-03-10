@@ -1,5 +1,5 @@
 from flask import Flask, request
-
+import os
 # from flask_cors import CORS
 app = Flask(__name__)
 
@@ -25,9 +25,11 @@ def test():
     print(set_info)
     print(query_info)
     print(inputQuery)
+
+    str="hive --database ssb_10_orc_transformed -e"+'"source /home/hive/app/queries/ssb_2_transformed/Q1.3.sql;"'
+    ret=os.system(str)
+    print(ret)
     return "success"
-
-
 
 
 
