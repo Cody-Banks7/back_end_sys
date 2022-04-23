@@ -6,6 +6,8 @@ import subprocess
 import re
 import time
 
+from fsm.parse_dag import write_lines
+
 app = Flask(__name__)
 
 op_re = re.compile("Operator \\[(.*)\\] takes time: ([0-9]+)")
@@ -94,13 +96,15 @@ def test():
     # add time for ghive
     tree_dict_ghive = {}
     for item in vertex_list:
-        f = open('operator_' + item, 'r')
+        f = open('operator_' + item.split(" ")[0] + item.split(" ")[1], 'r')
         tree_ghive = json.load(f)
         op_time = get_time('vis4GHive.log')
         # print(op_time)
         for op in tree_ghive:
             addTime(op, op_time)
+        # write back
         tree_dict_ghive[item] = tree_ghive
+        json.dump(tree_ghive, f, indent=2, ensure_ascii=False, separators=(',', ': '))
 
     # add into ignore
     subprocess.Popen(["rm  /tmp/plan/ignore_vertices.txt"], shell=True, stdout=subprocess.PIPE)
@@ -120,7 +124,8 @@ def test():
 
     # get yarn
     app_id = ""
-    for s in bytes.decode(out):
+    out = bytes.decode(out).split('\n')
+    for s in out:
         if s.startswith("applicationId:"):
             app_id = s.strip().split(':')[1].strip()
         if s.startswith("total-time:"):
@@ -133,15 +138,16 @@ def test():
     # add time for hive
     tree_dict_hive = {}
     for item in vertex_list:
-        f = open('operator_' + item, 'r')
-        tree_ghive = json.load(f)
+        f = open('operator_' + item.split(" ")[0] + item.split(" ")[1], 'r')
+        tree_hive = json.load(f)
         op_time = get_time('vis4Hive.log')
         # print(op_time)
-        for op in tree_ghive:
+        for op in tree_hive:
             addTime(op, op_time)
-        tree_dict_hive[item] = tree_ghive
-
-
+        # write back
+        tree_dict_hive[item] = tree_hive
+        json.dump(tree_hive, f, indent=2, ensure_ascii=False, separators=(',', ': '))
+        
     return "success"
 
 
