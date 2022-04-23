@@ -94,11 +94,11 @@ def test():
     print(vertex_list)
 
     # add time for ghive
+    op_time = get_time('vis4GHive.log')
     tree_dict_ghive = {}
     for item in vertex_list:
         f = open('operator_' + item.split(" ")[0] + item.split(" ")[1], 'r')
         tree_ghive = json.load(f)
-        op_time = get_time('vis4GHive.log')
         # print(op_time)
         for op in tree_ghive:
             addTime(op, op_time)
@@ -136,11 +136,11 @@ def test():
     print(bytes.decode(out))
 
     # add time for hive
+    op_time = get_time('vis4Hive.log')
     tree_dict_hive = {}
     for item in vertex_list:
         f = open('operator_' + item.split(" ")[0] + item.split(" ")[1], 'r')
         tree_hive = json.load(f)
-        op_time = get_time('vis4Hive.log')
         # print(op_time)
         for op in tree_hive:
             addTime(op, op_time)
