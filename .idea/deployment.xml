@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" autoUpload="Always" serverName="hive@10.20.120.63:38438 key" remoteFilesAllowedToDisappearOnAutoupload="false">
+    <serverData>
+      <paths name="cxsj">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/home/hive/workspace/jrz_workspace/back_end_to_hive/back_end_sys" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="hive@10.20.120.63:38438 key">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+    </serverData>
+    <option name="myAutoUpload" value="ALWAYS" />
+  </component>
+</project>

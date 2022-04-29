@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="35657b8b-12f7-4bb5-bd52-f155c94beb87" name="cxsj">
+        <fileTransfer accessType="SFTP" host="10.20.120.63" port="38438" sshConfigId="a6291804-fa9a-4a2d-a50f-a4776607b056" sshConfig="hive@10.20.120.63:38438 key" keyPair="true">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

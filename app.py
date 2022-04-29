@@ -1,153 +1,60 @@
 import json
 
-from flask import Flask, request
-import os
-import subprocess
-import re
-import time
+from flask import Flask, request, jsonify
 
-from fsm.parse_dag import write_lines
+import exec_cmd
 
 app = Flask(__name__)
 
-op_re = re.compile("Operator \\[(.*)\\] takes time: ([0-9]+)")
-sort_re = re.compile(" (Reducer.*): done sorting span.*time=([0-9]+)")
+
+def read_json_obj(filename: str):
+    with open(filename, 'r', encoding='utf-8') as fp:
+        json_obj = json.load(fp)
+    return json_obj
 
 
-def get_time(input_path: str):
-    op_time = {}
-    with open(input_path) as f:
-        for line in f:
-            res = op_re.findall(line)
-            if res:
-                if res[0][0] not in op_time:
-                    op_time[res[0][0]] = 0
-                op_time[res[0][0]] = op_time[res[0][0]] + int(res[0][1])
-            res = sort_re.findall(line)
-            if res:
-                # print(res)
-                if res[0][0] not in op_time:
-                    op_time[res[0][0]] = 0
-                op_time[res[0][0]] = op_time[res[0][0]] + int(res[0][1])
-    return op_time
+@app.route('/api/dag/', methods=['GET'])
+def get_dag():
+    plan_obj = read_json_obj("output/dag.json")
+    return jsonify(plan_obj), 200, {"Content-Type": "application/json"}
 
 
-def addTime(op: {}, op_time: {}):
-    if op['str'] in op_time:
-        print(op_time[op['str']])
-        op['time'] = op_time[op['str']]
-    if 'children' in op:
-        for child in op['children']:
-            addTime(child, op_time)
+@app.route('/api/hive-tasks/', methods=['GET'])
+def get_all_tasks():
+    tasks_obj = read_json_obj("output/hive_tasks.json")
+    print('get_all_tasks finished')
+    return jsonify(tasks_obj), 200, {"Content-Type": "application/json"}
+
+
+@app.route('/api/ghive-tasks/', methods=['GET'])
+def get_all_tasks2():
+    tasks_obj = read_json_obj("output/ghive_tasks.json")
+    print('get_all_tasks finished')
+    return jsonify(tasks_obj), 200, {"Content-Type": "application/json"}
+
+
+@app.route('/api/operators/', methods=['GET'])
+def get_all_tasks3():
+    tasks_obj = read_json_obj("output/op_trees.json")
+    print('get_all_tasks finished')
+    return jsonify(tasks_obj), 200, {"Content-Type": "application/json"}
 
 
 @app.route('/', methods=["GET", "POST"])
 def test():
     # basic_para = request.values.get('basic_para')
-    workerNum = request.values.get('workerNum')
-    containerNum = request.values.get('containerNum')
-    maxThread = request.values.get('maxThread')
-    memPerThread = request.values.get('memPerThread')
     set_info = request.values.get('set_info')
     query_info = request.values.get('query_info')
     inputQuery = request.values.get('inputQuery')
-    print(workerNum)
-    print(containerNum)
-    print(maxThread)
-    print(memPerThread)
     print(set_info)
     print(query_info)
     print(inputQuery)
+    hive_command = "hive --database " + set_info + " -e \"source /home/hive/queries/ssb/" + query_info + ".sql;\""
 
-    app_str = "hive --database " + set_info + " -e \"source /home/hive/queries/ssb/" + query_info + ".sql;\""
-    print(app_str)
-    # ret=os.system(str)
-    ret = subprocess.Popen([app_str], shell=True, stdout=subprocess.PIPE)
-    (out, err) = ret.communicate()
-    print(bytes.decode(out))
+    # Execute, generate output files to output/ directory.
+    exec_cmd.exec_cmd(hive_command)
 
-    # time.sleep(30)
 
-    # get yarn
-    app_id = ""
-    out = bytes.decode(out).split('\n')
-    for s in out:
-        if s.startswith("applicationId:"):
-            app_id = s.strip().split(':')[1].strip()
-        if s.startswith("total-time:"):
-            total_time = s.strip().split(':')[1].strip()
-    yarn_command = "yarn logs -applicationId " + app_id + " > vis4GHive.log"
-    ret = subprocess.Popen([yarn_command], shell=True, stdout=subprocess.PIPE)
-    (out, err) = ret.communicate()
-    print(bytes.decode(out))
-
-    # get vertex
-    task_re = re.compile('.*VertexName: (.*)Vertex.*, TaskAttemptID:(.*), processorName.*')
-    vertex_list = []
-    with open("vis4GHive.log") as f:
-        for line in f:
-            res = task_re.findall(line)
-            if res:
-                vertex_id = res[0][0].split(",")[0]
-                if vertex_id not in vertex_list:
-                    vertex_list.append(vertex_id)
-    print(vertex_list)
-
-    # add time for ghive
-    op_time = get_time('vis4GHive.log')
-    tree_dict_ghive = {}
-    for item in vertex_list:
-        f = open('operator_' + item.split(" ")[0] + item.split(" ")[1], 'r')
-        tree_ghive = json.load(f)
-        # print(op_time)
-        for op in tree_ghive:
-            addTime(op, op_time)
-        # write back
-        tree_dict_ghive[item] = tree_ghive
-        json.dump(tree_ghive, f, indent=2, ensure_ascii=False, separators=(',', ': '))
-
-    # add into ignore
-    subprocess.Popen(["rm  /tmp/plan/ignore_vertices.txt"], shell=True, stdout=subprocess.PIPE)
-    text = "{\n"
-    for vertex in vertex_list:
-        text += "\"" + vertex + "\": false,\n"
-    text += "}"
-    file = open("/tmp/plan/ignore_vertices.txt", mode='w')
-    file.write(text)
-
-    # run hive
-    ret = subprocess.Popen([app_str], shell=True, stdout=subprocess.PIPE)
-    (out, err) = ret.communicate()
-    print(bytes.decode(out))
-
-    # time.sleep(30)
-
-    # get yarn
-    app_id = ""
-    out = bytes.decode(out).split('\n')
-    for s in out:
-        if s.startswith("applicationId:"):
-            app_id = s.strip().split(':')[1].strip()
-        if s.startswith("total-time:"):
-            total_time = s.strip().split(':')[1].strip()
-    yarn_command = "yarn logs -applicationId " + app_id + " > vis4Hive.log"
-    ret = subprocess.Popen([yarn_command], shell=True, stdout=subprocess.PIPE)
-    (out, err) = ret.communicate()
-    print(bytes.decode(out))
-
-    # add time for hive
-    op_time = get_time('vis4Hive.log')
-    tree_dict_hive = {}
-    for item in vertex_list:
-        f = open('operator_' + item.split(" ")[0] + item.split(" ")[1], 'r')
-        tree_hive = json.load(f)
-        # print(op_time)
-        for op in tree_hive:
-            addTime(op, op_time)
-        # write back
-        tree_dict_hive[item] = tree_hive
-        json.dump(tree_hive, f, indent=2, ensure_ascii=False, separators=(',', ': '))
-        
     return "success"
 
 
