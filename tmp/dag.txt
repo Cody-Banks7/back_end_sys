@@ -1,45 +1,45 @@
 [
 	{
-		"str":"Reducer 4",
+		"str":"Reducer 3",
 		"children":[
 			{
-				"str":"Reducer 3",
-				"parentId":"Reducer 4",
+				"str":"Reducer 2",
+				"parentId":"Reducer 3",
 				"children":[
 					{
-						"str":"Reducer 2",
-						"parentId":"Reducer 3",
+						"str":"Map 1",
+						"parentId":"Reducer 2",
 						"children":[
 							{
-								"str":"Map 1",
-								"parentId":"Reducer 2",
+								"str":"Map 4",
+								"parentId":"Map 1",
 								"subTree":[
 									{
-										"str":"[RS_64]",
+										"str":"[RS_65]",
 										"ind":28,
 										"rows":0,
 										"width":0,
 										"children":[
 											{
-												"str":"[SEL_63]",
-												"parentId":"[RS_64]",
+												"str":"[SEL_64]",
+												"parentId":"[RS_65]",
 												"ind":29,
-												"rows":41995307,
-												"width":48,
+												"rows":5,
+												"width":182,
 												"children":[
 													{
-														"str":"[FIL_62]",
-														"parentId":"[SEL_63]",
+														"str":"[FIL_63]",
+														"parentId":"[SEL_64]",
 														"ind":31,
-														"rows":41995307,
-														"width":48,
+														"rows":5,
+														"width":182,
 														"children":[
 															{
-																"str":"[TS_0]",
-																"parentId":"[FIL_62]",
+																"str":"[TS_3]",
+																"parentId":"[FIL_63]",
 																"ind":33,
-																"rows":41995307,
-																"width":48
+																"rows":1500000,
+																"width":182
 															}
 														]
 													}
@@ -51,34 +51,34 @@
 							},
 							{
 								"str":"Map 5",
-								"parentId":"Reducer 2",
+								"parentId":"Map 1",
 								"subTree":[
 									{
-										"str":"[RS_67]",
-										"ind":28,
+										"str":"[RS_68]",
+										"ind":26,
 										"rows":0,
 										"width":0,
 										"children":[
 											{
-												"str":"[SEL_66]",
-												"parentId":"[RS_67]",
-												"ind":29,
-												"rows":58333,
-												"width":192,
+												"str":"[SEL_67]",
+												"parentId":"[RS_68]",
+												"ind":27,
+												"rows":10,
+												"width":11,
 												"children":[
 													{
-														"str":"[FIL_65]",
-														"parentId":"[SEL_66]",
-														"ind":31,
-														"rows":58333,
-														"width":192,
+														"str":"[FIL_66]",
+														"parentId":"[SEL_67]",
+														"ind":29,
+														"rows":10,
+														"width":11,
 														"children":[
 															{
-																"str":"[TS_3]",
-																"parentId":"[FIL_65]",
-																"ind":33,
-																"rows":1400000,
-																"width":192
+																"str":"[TS_6]",
+																"parentId":"[FIL_66]",
+																"ind":31,
+																"rows":2556,
+																"width":11
 															}
 														]
 													}
@@ -90,34 +90,34 @@
 							},
 							{
 								"str":"Map 6",
-								"parentId":"Reducer 2",
+								"parentId":"Map 1",
 								"subTree":[
 									{
-										"str":"[RS_70]",
-										"ind":26,
+										"str":"[RS_71]",
+										"ind":24,
 										"rows":0,
 										"width":0,
 										"children":[
 											{
-												"str":"[SEL_69]",
-												"parentId":"[RS_70]",
-												"ind":27,
-												"rows":583,
-												"width":199,
+												"str":"[SEL_70]",
+												"parentId":"[RS_71]",
+												"ind":25,
+												"rows":5,
+												"width":357,
 												"children":[
 													{
-														"str":"[FIL_68]",
-														"parentId":"[SEL_69]",
-														"ind":29,
-														"rows":583,
-														"width":193,
+														"str":"[FIL_69]",
+														"parentId":"[SEL_70]",
+														"ind":27,
+														"rows":5,
+														"width":357,
 														"children":[
 															{
-																"str":"[TS_6]",
-																"parentId":"[FIL_68]",
-																"ind":31,
-																"rows":14000,
-																"width":193
+																"str":"[TS_9]",
+																"parentId":"[FIL_69]",
+																"ind":29,
+																"rows":100000,
+																"width":357
 															}
 														]
 													}
@@ -129,73 +129,34 @@
 							},
 							{
 								"str":"Map 7",
-								"parentId":"Reducer 2",
+								"parentId":"Map 1",
 								"subTree":[
 									{
-										"str":"[RS_73]",
-										"ind":24,
-										"rows":0,
-										"width":0,
-										"children":[
-											{
-												"str":"[SEL_72]",
-												"parentId":"[RS_73]",
-												"ind":25,
-												"rows":730,
-												"width":12,
-												"children":[
-													{
-														"str":"[FIL_71]",
-														"parentId":"[SEL_72]",
-														"ind":27,
-														"rows":730,
-														"width":12,
-														"children":[
-															{
-																"str":"[TS_9]",
-																"parentId":"[FIL_71]",
-																"ind":29,
-																"rows":2556,
-																"width":12
-															}
-														]
-													}
-												]
-											}
-										]
-									}
-								]
-							},
-							{
-								"str":"Map 8",
-								"parentId":"Reducer 2",
-								"subTree":[
-									{
-										"str":"[RS_76]",
+										"str":"[RS_74]",
 										"ind":22,
 										"rows":0,
 										"width":0,
 										"children":[
 											{
-												"str":"[SEL_75]",
-												"parentId":"[RS_76]",
+												"str":"[SEL_73]",
+												"parentId":"[RS_74]",
 												"ind":23,
-												"rows":42000,
-												"width":99,
+												"rows":10,
+												"width":357,
 												"children":[
 													{
-														"str":"[FIL_74]",
-														"parentId":"[SEL_75]",
+														"str":"[FIL_72]",
+														"parentId":"[SEL_73]",
 														"ind":25,
-														"rows":42000,
-														"width":99,
+														"rows":10,
+														"width":357,
 														"children":[
 															{
 																"str":"[TS_12]",
-																"parentId":"[FIL_74]",
+																"parentId":"[FIL_72]",
 																"ind":27,
-																"rows":210000,
-																"width":99
+																"rows":10000000,
+																"width":357
 															}
 														]
 													}
@@ -208,63 +169,81 @@
 						],
 						"subTree":[
 							{
-								"str":"[RS_30]",
+								"str":"[RS_83]",
 								"ind":14,
 								"rows":0,
 								"width":0,
 								"children":[
 									{
-										"str":"[GBY_29]",
-										"parentId":"[RS_30]",
+										"str":"[GBY_82]",
+										"parentId":"[RS_83]",
 										"ind":15,
-										"rows":3,
-										"width":199,
+										"rows":351390832,
+										"width":45,
 										"children":[
 											{
-												"str":"[SEL_27]",
-												"parentId":"[GBY_29]",
+												"str":"[SEL_81]",
+												"parentId":"[GBY_82]",
 												"ind":17,
-												"rows":51430,
-												"width":207,
+												"rows":351390832,
+												"width":45,
 												"children":[
 													{
-														"str":"[MAPJOIN_58]",
-														"parentId":"[SEL_27]",
+														"str":"[MAPJOIN_80]",
+														"parentId":"[SEL_81]",
 														"ind":19,
-														"rows":51430,
-														"width":207,
+														"rows":351390832,
+														"width":45,
 														"children":[
 															{
-																"str":"[MAPJOIN_57]",
-																"parentId":"[MAPJOIN_58]",
+																"str":"[MAPJOIN_79]",
+																"parentId":"[MAPJOIN_80]",
 																"ind":21,
-																"rows":257147,
-																"width":215,
+																"rows":319446204,
+																"width":45,
 																"children":[
 																	{
-																		"str":"[MAPJOIN_56]",
-																		"parentId":"[MAPJOIN_57]",
+																		"str":"[MAPJOIN_78]",
+																		"parentId":"[MAPJOIN_79]",
 																		"ind":23,
-																		"rows":255034,
-																		"width":219,
+																		"rows":290405634,
+																		"width":45,
 																		"children":[
 																			{
-																				"str":"[MERGEJOIN_55]",
-																				"parentId":"[MAPJOIN_56]",
+																				"str":"[MAPJOIN_77]",
+																				"parentId":"[MAPJOIN_78]",
 																				"ind":25,
-																				"rows":6124292,
-																				"width":133,
+																				"rows":264005117,
+																				"width":45,
 																				"children":[
 																					{
-																						"str":"Map 5",
-																						"parentId":"[MERGEJOIN_55]",
+																						"str":"[SEL_76]",
+																						"parentId":"[MAPJOIN_77]",
 																						"ind":27,
-																						"rows":0,
-																						"width":0
+																						"rows":240004647,
+																						"width":45,
+																						"children":[
+																							{
+																								"str":"[FIL_75]",
+																								"parentId":"[SEL_76]",
+																								"ind":29,
+																								"rows":240004647,
+																								"width":45,
+																								"children":[
+																									{
+																										"str":"[TS_0]",
+																										"parentId":"[FIL_75]",
+																										"ind":31,
+																										"rows":300005811,
+																										"width":45
+																									}
+																								]
+																							}
+																						]
 																					},
 																					{
-																						"str":"Map 1",
-																						"parentId":"[MERGEJOIN_55]",
+																						"str":"Map 4",
+																						"parentId":"[MAPJOIN_77]",
 																						"ind":27,
 																						"rows":0,
 																						"width":0
@@ -272,8 +251,8 @@
 																				]
 																			},
 																			{
-																				"str":"Map 6",
-																				"parentId":"[MAPJOIN_56]",
+																				"str":"Map 5",
+																				"parentId":"[MAPJOIN_78]",
 																				"ind":25,
 																				"rows":0,
 																				"width":0
@@ -281,8 +260,8 @@
 																		]
 																	},
 																	{
-																		"str":"Map 7",
-																		"parentId":"[MAPJOIN_57]",
+																		"str":"Map 6",
+																		"parentId":"[MAPJOIN_79]",
 																		"ind":23,
 																		"rows":0,
 																		"width":0
@@ -290,8 +269,8 @@
 																]
 															},
 															{
-																"str":"Map 8",
-																"parentId":"[MAPJOIN_58]",
+																"str":"Map 7",
+																"parentId":"[MAPJOIN_80]",
 																"ind":21,
 																"rows":0,
 																"width":0
@@ -309,21 +288,21 @@
 				],
 				"subTree":[
 					{
-						"str":"[RS_78]",
+						"str":"[RS_85]",
 						"ind":10,
 						"rows":0,
 						"width":0,
 						"children":[
 							{
-								"str":"[GBY_77]",
-								"parentId":"[RS_78]",
+								"str":"[GBY_84]",
+								"parentId":"[RS_85]",
 								"ind":11,
-								"rows":3,
-								"width":199,
+								"rows":175695416,
+								"width":45,
 								"children":[
 									{
-										"str":"Reducer 2",
-										"parentId":"[GBY_77]",
+										"str":"Map 1",
+										"parentId":"[GBY_84]",
 										"ind":13,
 										"rows":0,
 										"width":0
@@ -337,21 +316,21 @@
 		],
 		"subTree":[
 			{
-				"str":"[FS_80]",
+				"str":"[FS_87]",
 				"ind":6,
 				"rows":0,
 				"width":0,
 				"children":[
 					{
-						"str":"[SEL_79]",
-						"parentId":"[FS_80]",
+						"str":"[SEL_86]",
+						"parentId":"[FS_87]",
 						"ind":7,
-						"rows":3,
-						"width":199,
+						"rows":175695416,
+						"width":45,
 						"children":[
 							{
-								"str":"Reducer 3",
-								"parentId":"[SEL_79]",
+								"str":"Reducer 2",
+								"parentId":"[SEL_86]",
 								"ind":9,
 								"rows":0,
 								"width":0

@@ -1,6 +1,5 @@
 import json
-import re
-
+import re 
 
 def get_sub_op_tree(li: list, v_op_tree):
     for vertex in li:
@@ -34,19 +33,33 @@ def get_frontier_op(v_op_tree):
     return frontier_op
 
 
-def get_sub_dag(li: list, edges: list):
+def get_sub_dag(li: list, edges: list, edge_idx_map: dict):
     for vertex in li:
         edge = {}
-        edge['src'] = vertex['str']
-        if 'parentId' in vertex:
-            edge['dest'] = vertex['parentId']
-            edges.append(edge)
-        if 'children' in vertex:
-            get_sub_dag(vertex['children'], edges)
+        if vertex['str'] in edge_idx_map:
+            edge['src'] =edge_idx_map[vertex['str']]
+            if 'parentId' in vertex:
+                edge['dst'] =edge_idx_map[vertex['parentId']]
+                edges.append(edge)
+            if 'children' in vertex:
+                get_sub_dag(vertex['children'], edges,edge_idx_map)
 
-def get_dag(li: list):
+def get_dag(li: list, ver_li: list):
+    vertexes = []
+    edge_idx_map = {}
+    i = 0
+    for item in ver_li:
+        current_node = {'idx': i, 'vdat': {}}
+        current_node['vdat']['vertex_name'] = item.strip()
+        current_node['vdat']['hv_type'] = item.strip().split(' ')[0]
+        edge_idx_map[item.strip()] = i
+        vertexes.append(current_node)
+        i += 1
+    print('edge_idx_map:',edge_idx_map)
     edges = []
-    get_sub_dag(li, edges)
+    get_sub_dag(li, edges, edge_idx_map)
+    file_in = {}
+    file_in['vertexes'] = vertexes
+    file_in['edges'] = edges
     with open("output/dag.json", "w") as f:
-        f.write(json.dumps(edges))
-
+        f.write(json.dumps(file_in))

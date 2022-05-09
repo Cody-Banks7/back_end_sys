@@ -99,3 +99,4 @@ def parse_task_logs(ghive_log, hive_log):
     hive_tasks = to_json(hive_vertex_map)
     with open('output/hive_tasks.json', 'w') as f:
         f.write(hive_tasks)
+    return ghive_tasks

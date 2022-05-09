@@ -40,7 +40,7 @@ def exec_cmd(hive_command):
     print("Hive ApplicationId:", hive_app_id)
 
     # Sleep several seconds waiting for log aggregation.
-    time.sleep(60)
+    time.sleep(80)
 
     # Get the log for GHive.
     ghive_yarn_command = str.format("yarn logs -applicationId {}", ghive_app_id)
@@ -55,17 +55,13 @@ def exec_cmd(hive_command):
     hive_log = bytes.decode(out)
 
     # Parse logs and generate the output file.
-    parse_task_logs(ghive_log, hive_log)
+    ghive_vertex_map=json.loads(parse_task_logs(ghive_log, hive_log))
 
     # get vertex
-    task_re = re.compile('.*VertexName: (.*)Vertex.*, TaskAttemptID:(.*), processorName.*')
     vertex_list = []
-    for line in ghive_log.split('\n'):
-        res = task_re.findall(line)
-        if res:
-            vertex_id = res[0][0].split(",")[0]
-            if vertex_id not in vertex_list:
-                vertex_list.append(vertex_id)
+    for item in ghive_vertex_map:
+        if item['vec_name'] not in vertex_list:
+	        vertex_list.append(item['vec_name'])
     print(vertex_list)
 
     # get DAG
@@ -74,8 +70,7 @@ def exec_cmd(hive_command):
     f = open('tmp/dag.txt', 'r')
     dag = json.load(f)
 
-    get_dag(dag)  # 拿到对应的边
-    # 和vertex_list拼成一个文件可以直接扔可视化
+    get_dag(dag,vertex_list)
 
     op_tree = get_op_tree(dag)
 
@@ -83,6 +78,15 @@ def exec_cmd(hive_command):
 
     # add time for ghive
     ghive_op_time = get_operator_time(input_log=ghive_log)
+    print("ghive_op_time:",ghive_op_time)
+    print("frontier_op:", frontier_op)
+#for vertex, op in frontier_op.items():
+# if vertex in ghive_op_time:
+#           if op not in ghive_op_time:
+#               ghive_op_time[op] = 0
+#                print(op, "not in ghive_op_time")
+#            ghive_op_time[op] += ghive_op_time[vertex]
+
     for item in vertex_list:
         add_time(op_tree[item], ghive_op_time, True)
 
@@ -101,9 +105,14 @@ def exec_cmd(hive_command):
     for item in vertex_list:
         add_time(op_tree[item], hive_op_time, False)
 
+    operator_chosen = vertex_list[len(vertex_list)//2-1]  #need to modify here
+    operator_tree_chosen = {}
+    operator_tree_chosen['dag'] = op_tree[operator_chosen]
+    with open('output/op_trees_all.json', 'w') as f:
+	        f.write(json.dumps(op_tree))
     with open('output/op_trees.json', 'w') as f:
-        f.write(json.dumps(op_tree))
-
+        f.write(json.dumps(operator_tree_chosen))
+    return operator_chosen
 
 if __name__ == '__main__':
     exec_cmd(str.format("hive --database {} -e \"source /home/hive/queries/ssb/{}.sql;\"", "ssb_7_orc", "Q4.3"))

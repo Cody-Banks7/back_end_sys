@@ -39,6 +39,7 @@ def get_operator_time(input_log: str):
 
 
 def add_time(op: {}, op_time: {}, gpu: bool):
+    op['name']=op['str']
     if gpu:
         if trim(op['str']) in op_time:
             op['gpu_time'] = op_time[trim(op['str'])]
